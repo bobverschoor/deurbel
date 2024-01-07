@@ -1,0 +1,24 @@
+
+[modules]
+[modules.deurbel_knop]
+enabled = true
+gpio_channel = #
+bounce_time_ms = 500
+
+[modules.deurbel_gong]
+enabled = true
+output = true
+gong_duration_ms = 1000
+gpio_channel = #
+
+[modules.messaging]
+enabled = false
+output = true
+
+[modules.photo]
+enabled = false
+input = true
+
+[modules.home_automation]
+enabled = false
+output = true

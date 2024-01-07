@@ -1,0 +1,22 @@
+[modules]
+
+[modules.deurbelgong]
+enabled = true
+output = true
+
+[modules.deurbelknop]
+enabled = true
+output = true
+
+
+[modules.messaging]
+enabled = false
+output = true
+
+[modules.photo]
+enabled = false
+input = true
+
+[modules.homeautomation]
+enabled = false
+output = true
