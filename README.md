@@ -11,6 +11,8 @@ Dit wordt gedetecteerd door de applicatie en een aantal acties worden uitgezet:
 
 ## Installatie
 Dit is opgezet als een poetry project, dus poetry zal aanwezig moeten zijn, naast uiteraard een python executable (3.11).
-Op de microcontroller (meestal de raspberry Pi) moet de package python3-RPi zijn geinstalleerd, 
+
+Op de microcontroller (meestal de raspberry Pi) moet de package python3-RPi zijn geïnstalleerd, 
 maar deze is standaard onderdeel van raspbian dan wel micropython.
+Als deze toch niet is geïnstalleerd, dan volgt er bij het opstarten een foutmelding en exitcode 1.
 

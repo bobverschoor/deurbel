@@ -5,10 +5,12 @@ from deurbel_knop import DeurbelKnop
 from gpio_gateway import RaspberryPiException
 
 
-class TestdeurbelKnop(unittest.TestCase):
+class TestDeurbelKnop(unittest.TestCase):
     def test_setup(self):
         self.assertRaises(ConfigurationException, DeurbelKnop,
                           {'enabled': True, 'output': True, 'bounce_time_ms': 1001, 'gpio_channel': 8}, None)
+        self.assertRaises(ConfigurationException, DeurbelKnop,
+                  {'enabled': False, 'output': True, 'bounce_time_ms': 1000, 'gpio_channel': 8}, None)
 
         self.assertRaises(RaspberryPiException, DeurbelKnop,
                           {'enabled': True, 'output': True, 'bounce_time_ms': 500, 'gpio_channel': 100}, None)

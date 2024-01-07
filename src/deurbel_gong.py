@@ -1,7 +1,7 @@
 import time
 
 import gpio_gateway
-from configuration import ConfigurationException
+from configuration import ConfigurationException, Configuration
 
 
 class DeurbelGong:
@@ -9,6 +9,7 @@ class DeurbelGong:
     CONFIG_CHANNEL_NUMBER = "gpio_channel"
 
     def __init__(self, configuration):
+        self.enabled = configuration[Configuration.ENABLED]
         self._duration_ms = configuration[DeurbelGong.CONFIG_DURATION]
         if self._duration_ms > 10000 or self._duration_ms < 0:
             raise ConfigurationException("gong duration exceeds limits, should be between 0 - 10 seconds: "
@@ -17,11 +18,13 @@ class DeurbelGong:
         self._pi.setup_output_channel(configuration[DeurbelGong.CONFIG_CHANNEL_NUMBER])
 
     def sound(self):
-        try:
-            self._pi.set_output_high()
-            time.sleep(self._duration_ms / 1000)
-        finally:
-            self.silence()
+        if self.enabled:
+            try:
+                self._pi.set_output_high()
+                time.sleep(self._duration_ms / 1000)
+            finally:
+                self.silence()
 
     def silence(self):
-        self._pi.set_output_low()
+        if self.enabled:
+            self._pi.set_output_low()

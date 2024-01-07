@@ -9,6 +9,7 @@ class ConfigurationException(Exception):
 class Configuration:
     DEURBEL_KNOP = 'deurbel_knop'
     DEURBEL_GONG = 'deurbel_gong'
+    ENABLED = 'enabled'
 
     def __init__(self, filename):
         if os.path.exists(filename):
