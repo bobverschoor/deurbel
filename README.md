@@ -10,5 +10,7 @@ Dit wordt gedetecteerd door de applicatie en een aantal acties worden uitgezet:
 4. (optioneel) Een trigger wordt gestuurd naar home assistant.
 
 ## Installatie
-Dit is opgezet als een poetry project, dus poetry zal aanwezig moeten zijn, naast uiteraard een python executable.
+Dit is opgezet als een poetry project, dus poetry zal aanwezig moeten zijn, naast uiteraard een python executable (3.11).
+Op de microcontroller (meestal de raspberry Pi) moet de package python3-RPi zijn geinstalleerd, 
+maar deze is standaard onderdeel van raspbian dan wel micropython.
 

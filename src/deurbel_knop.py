@@ -1,4 +1,5 @@
 import gpio_gateway
+from configuration import ConfigurationException
 
 
 class DeurbelKnop:
@@ -7,5 +8,11 @@ class DeurbelKnop:
 
     def __init__(self, configuration, handler):
         self._pi = gpio_gateway.RaspberryPi()
+        if configuration[DeurbelKnop.CONFIG_BOUNCE_TIME] > 1000 or configuration[DeurbelKnop.CONFIG_BOUNCE_TIME] < 0:
+            raise ConfigurationException("Bounce time not within boundaries (0, 1000): " +
+                                         str(configuration[DeurbelKnop.CONFIG_BOUNCE_TIME]))
         self._pi.setup_input_handler(configuration[DeurbelKnop.CONFIG_CHANNEL_NUMBER], handler,
                                      configuration[DeurbelKnop.CONFIG_BOUNCE_TIME])
+
+    def using_mock(self):
+        return self._pi.using_mock()

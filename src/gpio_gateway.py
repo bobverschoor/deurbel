@@ -38,7 +38,14 @@ class RaspberryPi:
             raise RaspberryPiException("Output channel not setup")
         self._gpio.output(self._output_channel, False)
 
+    def using_mock(self):
+        if self._gpio.VERSION == 'mock':
+            return True
+        return False
+
 
 def check_channel_number(channel_number):
     if channel_number not in RaspberryPi.VALID_CHANNELS:
         raise RaspberryPiException("Wrong channel number for input: " + str(channel_number))
+
+

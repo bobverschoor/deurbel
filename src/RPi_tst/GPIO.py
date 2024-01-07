@@ -1,4 +1,4 @@
-# Puur voor ontwikkel doeleinden. Deze wordt conditional imported
+# Puur voor ontwikkelingsdoeleinden. Deze wordt conditional imported
 
 PUD_DOWN = 1
 BOARD = 1
@@ -7,7 +7,7 @@ OUT = 2
 HIGH = 1
 LOW = 0
 
-print("WARN: Using DEV version of GPIO. If unintential, install GPIO library first!")
+VERSION = 'mock'
 
 actions = []
 
