@@ -16,7 +16,3 @@ class TestConfiguration(unittest.TestCase):
     def test_get_module(self):
         config = Configuration("test-config.toml")
         self.assertEqual({"enabled": False, "input": True}, config.get_module("photo"))
-
-
-if __name__ == '__main__':
-    unittest.main()

@@ -1,13 +1,16 @@
 [modules]
 
-[modules.deurbelgong]
+[modules.deurbel_gong]
 enabled = true
 output = true
+gong_duration_ms = 1000
+gpio_channel = 7
 
-[modules.deurbelknop]
+[modules.deurbel_knop]
 enabled = true
 output = true
-
+gpio_channel = 8
+bounce_time_ms = 500
 
 [modules.messaging]
 enabled = false
