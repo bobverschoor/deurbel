@@ -8,6 +8,8 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 
+[tool.poetry.scripts]
+deurbel = "src/deurbel.py:main"
 
 [build-system]
 requires = ["poetry-core"]

@@ -13,8 +13,11 @@ class Configuration:
 
     def __init__(self, filename):
         if os.path.exists(filename):
-            with open(filename, "rb") as f:
-                self._config = tomllib.load(f)
+            try:
+                with open(filename, "rb") as f:
+                    self._config = tomllib.load(f)
+            except tomllib.TOMLDecodeError as e:
+                raise ConfigurationException("Config script: " + filename + " has an invalid syntax: " + str(e))
         else:
             raise ConfigurationException("Unable to find: " + filename)
         self._modules = self._config["modules"]

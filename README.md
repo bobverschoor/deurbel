@@ -25,7 +25,38 @@ De relais zal schakelen als er stroom door de magneet (van de relais) kan lopen,
 Dit wordt geleverd door Pin 8 'Aan' te zetten vanuit het programma.
 
 ## Installatie
-Dit is opgezet als een poetry project, dus poetry zal aanwezig moeten zijn, naast uiteraard een python executable (3.11).
+
+Uitgaande van een schone raspberry Pi bullseye release moeten de volgende pakketten worden geïnstalleerd:
+
+    sudo apt-get install git python3-distutils python3-dev libffi-dev cargo python3-pip libssl-dev libbz2-dev libreadline-dev liblzma-dev libsqlite3-dev
+
+Installeren van pyenv voor de virtuele environment:
+
+    curl https://pyenv.run | bash
+
+Voeg toe aan .bashrc:
+
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+    echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+
+en aan .profile:
+
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
+    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
+    echo 'eval "$(pyenv init -)"' >> ~/.profile
+
+Installeren van python 3.11 in de virtuele omgeving:
+
+    pyenv install 3.11
+
+Installeren van Poetry voor package management:
+    
+    curl -sSL https://install.python-poetry.org | python3 -
+
+Code uitchecken:
+git clone https://github.com/bobverschoor/deurbel.git
+
 
 Op de microcontroller (meestal de raspberry Pi) moet de package python3-RPi zijn geïnstalleerd, 
 maar deze is standaard onderdeel van raspbian dan wel micropython.
