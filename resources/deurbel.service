@@ -1,0 +1,14 @@
+[Unit]
+Description = Deurbel
+After = network.target
+
+[Service]
+Type = simple
+ExecStart = poetry run python src/deurbel.py
+Restart = on-failure
+SyslogIdentifier = Deurbel
+RestartSec = 5
+TimeoutStartSec = infinity
+
+[Install]
+WantedBy = multi-user.target
