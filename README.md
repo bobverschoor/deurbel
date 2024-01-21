@@ -28,7 +28,7 @@ Dit wordt geleverd door Pin 8 'Aan' te zetten vanuit het programma.
 
 Uitgaande van een schone raspberry Pi bullseye release moeten de volgende pakketten worden geïnstalleerd:
 
-    sudo apt-get install git python3-distutils python3-dev libffi-dev cargo python3-pip libssl-dev libbz2-dev libreadline-dev liblzma-dev libsqlite3-dev
+    sudo apt-get install git python3-distutils python3-dev libffi-dev cargo python3-pip libssl-dev libbz2-dev libreadline-dev liblzma-dev libsqlite3-dev rpi.gpio
 
 Installeren van pyenv voor de virtuele environment:
 
@@ -57,10 +57,10 @@ Installeren van Poetry voor package management:
 Code uitchecken:
 git clone https://github.com/bobverschoor/deurbel.git
 
+Het RPI.GPIO package moet op deze omgeving worden toegevoegd aan poetry via:
 
-Op de microcontroller (meestal de raspberry Pi) moet de package python3-RPi zijn geïnstalleerd, 
-maar deze is standaard onderdeel van raspbian dan wel micropython.
-Als deze toch niet is geïnstalleerd, dan volgt er bij het opstarten een foutmelding en exitcode 1.
+    poetry add RPi.GPIO
+
 
 
 

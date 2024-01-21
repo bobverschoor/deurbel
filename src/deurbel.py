@@ -22,7 +22,7 @@ class Deurbel:
     def main(self):
         self.setup()
         if self._knop.using_mock():
-            print("WARN: Using DEV version of GPIO. If unintentional, install GPIO library first!")
+            print("ERROR: Using DEV version of GPIO. Install GPIO library first!")
             exit(1)
         while True:
             time.sleep(self.timeout)

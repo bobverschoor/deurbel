@@ -6,6 +6,7 @@ IN = 1
 OUT = 2
 HIGH = 1
 LOW = 0
+RISING = 31
 
 VERSION = 'mock'
 
@@ -28,6 +29,7 @@ def output(pin, value):
     actions.append({'output': {'pin': pin, 'value': value}})
 
 
-def add_event_callback(channel_number, callback, bouncetime=0):
-    actions.append({'add_event_callback':
-                        {"channel_number": channel_number, "callback": callback, "bouncetime": bouncetime}})
+def add_event_detect(channel_number, edge, callback, bouncetime=0):
+    actions.append({'add_event_detect':
+                        {"channel_number": channel_number, "edge": edge, "callback": callback,
+                         "bouncetime": bouncetime}})
