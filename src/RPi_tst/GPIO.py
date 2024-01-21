@@ -29,7 +29,7 @@ def output(pin, value):
     actions.append({'output': {'pin': pin, 'value': value}})
 
 
-def add_event_detect(channel_number, edge, callback, bouncetime=0):
+def add_event_detect(channel_number, edge, callback=None, bouncetime=0):
     actions.append({'add_event_detect':
                         {"channel_number": channel_number, "edge": edge, "callback": callback,
                          "bouncetime": bouncetime}})
