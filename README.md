@@ -62,6 +62,9 @@ Het RPI.GPIO-package moet op deze omgeving worden toegevoegd aan poetry via:
 
     poetry add RPi.GPIO
 
-
+    sudo cp deurbel.service /etc/systemd/system/
+    systemctl enable <service file name without .service extension>
+    systemctl daemon-reload
+    systemctl start <service file name without .service extension>
 
 
