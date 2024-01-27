@@ -62,9 +62,18 @@ Het RPI.GPIO-package moet op deze omgeving worden toegevoegd aan poetry via:
 
     poetry add RPi.GPIO
 
-    sudo cp deurbel.service /etc/systemd/system/
-    systemctl enable <service file name without .service extension>
-    systemctl daemon-reload
-    systemctl start <service file name without .service extension>
+Test of het script kan draaien zonder fouten via:
+
+    poetry run python src/deurbel.py
+
+Als dat zo is kun je dit onder systemd als user service starten door het service script te kopieren naar de juiste directory:
+
+    mkdir -p ~/.config/systemd/user/
+    cp resources/deurbel.service ~/.config/systemd/user/
+    systemctl --user enable deurbel
+    systemctl --user daemon-reload
+    systemctl --user start deurbel
+
+
 
 
