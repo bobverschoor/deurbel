@@ -28,6 +28,8 @@ class Deurbel:
             time.sleep(self.timeout)
 
 
+print("Starting Deurbel")
+
 if __name__ == '__main__':
     deurbel = Deurbel()
     print("Deurbel config processed")
