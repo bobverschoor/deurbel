@@ -30,4 +30,5 @@ class Deurbel:
 
 if __name__ == '__main__':
     deurbel = Deurbel()
+    print("Deurbel config processed")
     deurbel.main()
