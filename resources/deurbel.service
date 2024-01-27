@@ -10,8 +10,8 @@ Restart = on-failure
 SyslogIdentifier = Deurbel
 RestartSec = 5
 TimeoutStartSec = infinity
-StandardOutput = syslog
-StandardError = syslog
+StandardOutput = journal
+StandardError = journal
 
 [Install]
 WantedBy = multi-user.target
