@@ -1,9 +1,12 @@
+import logging
 import os
 import tomllib
 
 
 class ConfigurationException(Exception):
-    pass
+    def __init__(self, message):
+        super().__init__(message)
+        logging.error(message)
 
 
 class Configuration:
@@ -21,6 +24,12 @@ class Configuration:
         else:
             raise ConfigurationException("Unable to find: " + filename)
         self._modules = self._config["modules"]
+
+    def get_log_filename(self):
+        if "main" in self._config and "logfile" in self._config["main"]:
+            return self._config["main"]["logfile"]
+        else:
+            raise ConfigurationException("Unable to find logfile in main section")
 
     def get_active_module_names(self):
         active_modules = []

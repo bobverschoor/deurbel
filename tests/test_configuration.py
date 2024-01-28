@@ -8,6 +8,8 @@ class TestConfiguration(unittest.TestCase):
     def test_configuration_init(self):
         self.assertRaises(ConfigurationException, Configuration, "tests/Fake.toml")
         self.assertRaises(ConfigurationException, Configuration, "test-config_wrongformat.toml.ini")
+        config = Configuration("test-config_no_logfile.toml.ini")
+        self.assertRaises(ConfigurationException, config.get_log_filename)
 
     def test_get_active_modules(self):
         config = Configuration("test-config.toml")

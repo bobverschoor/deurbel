@@ -66,7 +66,8 @@ Test of het script kan draaien zonder fouten via:
 
     poetry run python src/deurbel.py
 
-Als dat zo is kun je dit onder systemd als user service starten door het service script te kopieren naar de juiste directory:
+Als dat zo is, kun je dit onder systemd als user service starten door het service-script te kopiëren 
+naar de juiste directory, en vervolgens de service te starten:
 
     mkdir -p ~/.config/systemd/user/
     cp resources/deurbel.service ~/.config/systemd/user/
