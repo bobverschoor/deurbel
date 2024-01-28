@@ -1,6 +1,6 @@
 import time
 import logging
-from configuration import Configuration
+from configuration import Configuration, ConfigurationException
 from deurbel_gong import DeurbelGong
 from deurbel_knop import DeurbelKnop
 
@@ -26,13 +26,19 @@ class Deurbel:
         self._gong.sound()
 
     def main(self):
-        self.setup()
-        if self._knop.using_mock():
-            logging.error("Using DEV version of GPIO. Install GPIO library first!")
-            print("Deurbel Stopping due to error: Using DEV version of GPIO")
+        try:
+            self.setup()
+            if self._knop.using_mock():
+                logging.error("Using DEV version of GPIO. Install GPIO library first!")
+                print("Deurbel Stopping due to error: Using DEV version of GPIO")
+                exit(1)
+            logging.info("Entering main loop...")
+            while True:
+                time.sleep(self.timeout)
+        except ConfigurationException as e:
+            print(e)
+            logging.error(str(e))
             exit(1)
-        while True:
-            time.sleep(self.timeout)
 
 
 if __name__ == '__main__':

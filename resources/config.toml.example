@@ -1,3 +1,5 @@
+[main]
+logfile = "deurbel.log"
 
 [modules]
 [modules.deurbel_knop]
