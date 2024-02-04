@@ -1,9 +1,14 @@
+import logging
 import unittest
 
 from configuration import Configuration, ConfigurationException
 
 
 class TestConfiguration(unittest.TestCase):
+
+    def setUp(self):
+        logger = logging.getLogger()
+        logger.disabled = True
 
     def test_configuration_init(self):
         self.assertRaises(ConfigurationException, Configuration, "tests/Fake.toml")

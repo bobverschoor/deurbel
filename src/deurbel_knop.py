@@ -1,4 +1,4 @@
-import gpio_gateway
+from gateway import gpio_gateway
 from configuration import ConfigurationException, Configuration
 
 
