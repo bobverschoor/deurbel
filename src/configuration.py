@@ -6,12 +6,12 @@ import tomllib
 class ConfigurationException(Exception):
     def __init__(self, message):
         super().__init__(message)
-        logging.error(message)
 
 
 class Configuration:
     DEURBEL_KNOP = 'deurbel_knop'
     DEURBEL_GONG = 'deurbel_gong'
+    MESSENGER = 'messenger'
     ENABLED = 'enabled'
 
     def __init__(self, filename):
@@ -39,4 +39,7 @@ class Configuration:
         return active_modules
 
     def get_module(self, name):
-        return self._modules[name]
+        if name in self._modules:
+            return self._modules[name]
+        else:
+            return {name: {'enabled': False}}

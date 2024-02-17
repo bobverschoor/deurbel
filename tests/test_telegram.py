@@ -23,7 +23,3 @@ class TestTelegram(unittest.TestCase):
                       Telegram.CONFIG_BASE_URL: 'https://api.telegram.org'})
         t.setup()
         self.assertEqual("https://api.telegram.org/botfoobar", t._url)
-
-
-if __name__ == '__main__':
-    unittest.main()
