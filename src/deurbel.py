@@ -1,6 +1,6 @@
 import time
 import logging
-from configuration import Configuration, ConfigurationException
+from configuration import Configuration
 from deurbel_gong import DeurbelGong
 from deurbel_knop import DeurbelKnop
 from gateway.messenger_gateway import MessengerGateway

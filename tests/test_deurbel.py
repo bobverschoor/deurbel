@@ -1,6 +1,4 @@
 import unittest
-
-from configuration import ConfigurationException
 from deurbel import Deurbel
 
 
@@ -19,4 +17,3 @@ class DeurbelTest(unittest.TestCase):
                           {'output': {'pin': 7, 'value': 1}}, {'output': {'pin': 7, 'value': 0}}],
                          db._gong._pi._gpio.actions)
         self.assertRaises(RuntimeError, db.main)
-
