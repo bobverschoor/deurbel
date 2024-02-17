@@ -2,6 +2,7 @@
 logfile = "deurbel.log"
 
 [modules]
+
 [modules.deurbel_knop]
 enabled = true
 gpio_channel = #
@@ -13,14 +14,20 @@ output = true
 gong_duration_ms = 1000
 gpio_channel = #
 
-[modules.messaging]
-enabled = false
+[modules.messenger]
+enabled = true
 output = true
+
+[[modules.messenger.devices]]
+name = "telegram"
+token = ""
+base_url = "https://api.telegram.org"
+channel_id = ""
 
 [modules.photo]
 enabled = false
 input = true
 
-[modules.home_automation]
+[modules.homeautomation]
 enabled = false
 output = true
