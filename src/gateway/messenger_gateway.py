@@ -15,6 +15,7 @@ class MessengerGateway:
             self.enabled = config[Configuration.ENABLED]
         except KeyError:
             self.enabled = False
+            logging.info("Messenger not enabled, configuration missing")
         self._devices = []
 
     def setup(self):
@@ -34,6 +35,7 @@ class MessengerGateway:
             if len(self._devices) == 0:
                 logging.warning("No messenger devices configured, turning messenger off")
                 self.enabled = False
+        logging.info("Messenger enabled: " + str(self.enabled))
 
     def send(self, text="", photo_filename=""):
         if self.enabled:
