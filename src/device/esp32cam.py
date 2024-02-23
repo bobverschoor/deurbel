@@ -6,3 +6,6 @@ class Esp32Cam:
 
     def setup(self):
         pass
+
+    def __str__(self):
+        return "Esp32Cam"

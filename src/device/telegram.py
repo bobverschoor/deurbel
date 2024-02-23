@@ -54,3 +54,6 @@ class Telegram:
         r = requests.post(url, data=body)
         if r.status_code != requests.codes.ok:
             logging.error("Unable to send text via Telegram using: " + url + " and body: " + str(body) + ", " + r.text)
+
+    def __str__(self):
+        return "Telegram"
