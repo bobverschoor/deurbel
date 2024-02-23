@@ -24,11 +24,12 @@ class Deurbel:
         self._knop = DeurbelKnop(config.get_module(config.DEURBEL_KNOP), handler=self.deurbel_handler)
         self._messenger = MessengerGateway(config.get_module(config.MESSENGER))
         self._messenger.setup()
-        self._messenger.send(photo_filename="deurbel_el_layout.png", text="test foto")
+        self._messenger.send(photo_filename="resources/aanbellen.jpeg", text="Setup")
         logging.info("Deurbel setup finished")
 
     def deurbel_handler(self):
         self._gong.sound()
+        self._messenger.send(text="Er staat iemand bij de voordeur")
 
     def main(self):
         self.setup()

@@ -16,7 +16,7 @@ Als er op de schakelaar wordt gedrukt komt er spanning op Pin7 te staan.
 Hierbij wordt gebruik gemaakt van de interne pull down weerstand van de Pi, omdat er anders kortsluiting zou ontstaan. 
 Mocht je dat niet vertrouwen kun je altijd nog een extra weerstand er tussen zetten, maar het is hier niet nodig.
 
-![deurbel_el_layout.png](deurbel_el_layout.png)
+![deurbel_el_layout.png](resources/deurbel_el_layout.png)
 
 Aan de rechterkant is de output zijde. Hierbij is gebruik gemaakt van een transistor om de relais te kunnen laten schakelen.
  
