@@ -1,3 +1,5 @@
+import logging
+
 try:
     import RPi.GPIO as GPIO
 except ImportError:
@@ -22,11 +24,17 @@ class RaspberryPi:
     def setup_input_handler(self, channel_number, callback, bounce_time=200):
         check_channel_number(channel_number)
         self._gpio.setup(channel_number, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        self._gpio.add_event_detect(channel_number, GPIO.RISING, callback=callback, bouncetime=bounce_time)
+        logging.info("Setting up input to channel: " + str(channel_number) + " and pull_up_down to: " +
+                     str(GPIO.PUD_DOWN))
+        self._gpio.add_event_detect(channel_number=channel_number, edge=GPIO.RISING, callback=callback,
+                                    bouncetime=bounce_time)
+        logging.info("adding event detection to: " + str(channel_number) + " edge: " + str(GPIO.RISING) +
+                     " callback: " + str(callback) + " bounce time" + str(bounce_time))
 
     def setup_output_channel(self, channel_number):
         check_channel_number(channel_number)
         self._gpio.setup(channel_number, GPIO.OUT)
+        logging.info("setup output to channel: " + str(channel_number))
         self._output_channel = channel_number
 
     def set_output_high(self):
