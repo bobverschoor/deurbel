@@ -7,6 +7,7 @@ class DeurbelKnop:
     CONFIG_CHANNEL_NUMBER = "gpio_channel"
     CONFIG_BOUNCE_TIME = "bounce_time_ms"
     CONFIG_EDGE = "edge_detection"
+    CONFIG_RESISTOR = "resistor"
 
     def __init__(self, configuration, handler):
         if not configuration[Configuration.ENABLED]:
@@ -18,7 +19,8 @@ class DeurbelKnop:
         self._configured_channel = configuration[DeurbelKnop.CONFIG_CHANNEL_NUMBER]
         self._pi.setup_input_handler(configuration[DeurbelKnop.CONFIG_CHANNEL_NUMBER], handler,
                                      bounce_time=configuration[DeurbelKnop.CONFIG_BOUNCE_TIME],
-                                     edge_detection=configuration[DeurbelKnop.CONFIG_EDGE])
+                                     edge_detection=configuration[DeurbelKnop.CONFIG_EDGE],
+                                     resistor=configuration[DeurbelKnop.CONFIG_RESISTOR])
 
     def pressed(self, channel):
         if channel == self._configured_channel:

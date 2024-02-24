@@ -1,3 +1,4 @@
+import logging
 import time
 
 from gateway import gpio_gateway
@@ -19,6 +20,7 @@ class DeurbelGong:
 
     def sound(self):
         if self.enabled:
+            logging.info("Bel gaat")
             try:
                 self._pi.set_output_high()
                 time.sleep(self._duration_ms / 1000)
