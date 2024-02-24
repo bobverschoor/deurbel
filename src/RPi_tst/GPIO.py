@@ -1,12 +1,16 @@
 # Puur voor ontwikkelingsdoeleinden. Deze wordt conditional imported
 
-PUD_DOWN = 1
+PUD_DOWN = 21
+PUD_UP = 22
+PUD_OFF = 20
 BOARD = 1
 IN = 1
 OUT = 2
 HIGH = 1
 LOW = 0
 RISING = 31
+FALLING = 32
+BOTH = 33
 
 VERSION = 'mock'
 

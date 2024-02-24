@@ -7,6 +7,8 @@ logfile = "deurbel.log"
 enabled = true
 gpio_channel = #
 bounce_time_ms = 500
+edge_detection = # rising, falling or both
+resistor = # pull_up, pull_down or no_pull
 
 [modules.deurbel_gong]
 enabled = true

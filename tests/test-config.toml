@@ -14,6 +14,8 @@ enabled = true
 output = true
 gpio_channel = 8
 bounce_time_ms = 500
+edge_detection = "rising"
+resistor = "pull_down"
 
 [modules.messaging]
 enabled = false

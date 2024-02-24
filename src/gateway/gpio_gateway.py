@@ -21,12 +21,15 @@ class RaspberryPi:
         self._gpio.setwarnings(False)
         self._output_channel = -1
 
-    def setup_input_handler(self, channel_number, callback, bounce_time=200):
+    def setup_input_handler(self, channel_number, callback, bounce_time=200, resistor="pull_up",
+                            edge_detection="rising"):
         check_channel_number(channel_number)
-        self._gpio.setup(channel_number, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        resistor = gpio_resistor(resistor)
+        self._gpio.setup(channel_number, GPIO.IN, pull_up_down=resistor)
         logging.info("Setting up input to channel: " + str(channel_number) + " and pull_up_down to: " +
-                     str(GPIO.PUD_DOWN))
-        self._gpio.add_event_detect(channel_number, GPIO.RISING, callback=callback,
+                     str(resistor))
+        edge_detection = gpio_edge_detection(edge_detection)
+        self._gpio.add_event_detect(channel_number, edge_detection, callback=callback,
                                     bouncetime=bounce_time)
         logging.info("adding event detection to: " + str(channel_number) + " edge: " + str(GPIO.RISING) +
                      " callback: " + str(callback) + " bounce time" + str(bounce_time))
@@ -58,3 +61,25 @@ def check_channel_number(channel_number):
         raise RaspberryPiException("Wrong channel number for input: " + str(channel_number))
 
 
+def gpio_resistor(resistor):
+    if resistor == "pull_down":
+        return GPIO.PUD_DOWN
+    elif resistor == "pull_up":
+        return GPIO.PUD_UP
+    elif resistor == "no_pull":
+        return GPIO.PUD_OFF
+    else:
+        raise RaspberryPiException("Invalid resistor, should be pull_down, pull_up or no_pull instead: " +
+                                   str(resistor))
+
+
+def gpio_edge_detection(edge_detection):
+    if edge_detection == "rising":
+        return GPIO.RISING
+    elif edge_detection == "falling":
+        return GPIO.FALLING
+    elif edge_detection == "both":
+        return GPIO.BOTH
+    else:
+        raise RaspberryPiException("Invalid edge detection, should be rising, falling or both, instead: " +
+                                   str(edge_detection))

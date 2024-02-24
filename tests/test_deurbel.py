@@ -11,7 +11,7 @@ class DeurbelTest(unittest.TestCase):
         db.deurbel_handler(8)
         self.assertEqual([{"setmode": 1}, {"setwarnings": False},
                           {"setup": {"pin": 7, "io": 2, "pull_up_down": ""}}, {"setmode": 1}, {"setwarnings": False},
-                          {'setup': {'io': 1, 'pin': 8, 'pull_up_down': 1}},
+                          {'setup': {'io': 1, 'pin': 8, 'pull_up_down': 22}},
                           {'add_event_detect': {'bouncetime': 500, 'callback': db.deurbel_handler, 'channel_number': 8,
                            'edge': 31}},
                           {'output': {'pin': 7, 'value': 1}}, {'output': {'pin': 7, 'value': 0}}],

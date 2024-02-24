@@ -13,10 +13,12 @@ class TestDeurbelKnop(unittest.TestCase):
                   {'enabled': False, 'output': True, 'bounce_time_ms': 1000, 'gpio_channel': 8}, None)
 
         self.assertRaises(RaspberryPiException, DeurbelKnop,
-                          {'enabled': True, 'output': True, 'bounce_time_ms': 500, 'gpio_channel': 100}, None)
+                          {'enabled': True, 'output': True, 'bounce_time_ms': 500, 'gpio_channel': 100,
+                           'edge_detection': 0, 'resistor': 0}, None)
 
     def test_using_mock(self):
-        knop = DeurbelKnop({'enabled': True, 'output': True, 'bounce_time_ms': 1, 'gpio_channel': 7},
+        knop = DeurbelKnop({'enabled': True, 'output': True, 'bounce_time_ms': 1, 'gpio_channel': 7,
+                            'edge_detection': 'rising', 'resistor': 'pull_up'},
                            None)
         knop._pi._gpio.actions = []
         self.assertTrue(knop.using_mock())
