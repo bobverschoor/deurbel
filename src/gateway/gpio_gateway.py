@@ -31,7 +31,7 @@ class RaspberryPi:
         edge_detection = gpio_edge_detection(edge_detection)
         self._gpio.add_event_detect(channel_number, edge_detection, callback=callback,
                                     bouncetime=bounce_time)
-        logging.info("adding event detection to: " + str(channel_number) + " edge: " + str(GPIO.RISING) +
+        logging.info("adding event detection to: " + str(channel_number) + " edge: " + str(edge_detection) +
                      " callback: " + str(callback) + " bounce time" + str(bounce_time))
 
     def setup_output_channel(self, channel_number):
