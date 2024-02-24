@@ -1,4 +1,3 @@
-import logging
 
 from gateway import gpio_gateway
 from configuration import ConfigurationException, Configuration
@@ -16,9 +15,6 @@ class DeurbelKnop:
             raise ConfigurationException("Bounce time not within boundaries (0, 1000): " +
                                          str(configuration[DeurbelKnop.CONFIG_BOUNCE_TIME]))
         self._configured_channel = configuration[DeurbelKnop.CONFIG_CHANNEL_NUMBER]
-        logging.info("Setting up knop to channel: " + str(configuration[DeurbelKnop.CONFIG_CHANNEL_NUMBER]) +
-                     " and bouncing time: " + str(configuration[DeurbelKnop.CONFIG_BOUNCE_TIME]))
-        logging.info("Setting up knop to channel: " + str(configuration[DeurbelKnop.CONFIG_CHANNEL_NUMBER]))
         self._pi.setup_input_handler(configuration[DeurbelKnop.CONFIG_CHANNEL_NUMBER], handler,
                                      configuration[DeurbelKnop.CONFIG_BOUNCE_TIME])
 
