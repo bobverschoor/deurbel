@@ -27,7 +27,7 @@ class Deurbel:
         self._messenger.send(photo_filename="resources/aanbellen.jpeg", text="Setup")
         logging.info("Deurbel setup finished")
 
-    def deurbel_handler(self):
+    def deurbel_handler(self, channel):
         self._gong.sound()
         self._messenger.send(text="Er staat iemand bij de voordeur")
 
