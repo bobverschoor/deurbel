@@ -21,7 +21,7 @@ def setmode(value):
     actions.append({'setmode': value})
 
 
-def setup(pin, io, pull_up_down=PUD_DOWN):
+def setup(pin, io, pull_up_down=""):
     actions.append({'setup': {'pin': pin, 'io': io, 'pull_up_down': pull_up_down}})
 
 

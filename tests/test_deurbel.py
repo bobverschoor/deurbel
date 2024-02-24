@@ -8,9 +8,9 @@ class DeurbelTest(unittest.TestCase):
         db.setup()
         self.assertIsNotNone(db._gong)
         self.assertIsNotNone(db._knop)
-        db.deurbel_handler(1)
+        db.deurbel_handler(8)
         self.assertEqual([{"setmode": 1}, {"setwarnings": False},
-                          {"setup": {"pin": 7, "io": 2, "pull_up_down": 1}}, {"setmode": 1}, {"setwarnings": False},
+                          {"setup": {"pin": 7, "io": 2, "pull_up_down": ""}}, {"setmode": 1}, {"setwarnings": False},
                           {'setup': {'io': 1, 'pin': 8, 'pull_up_down': 1}},
                           {'add_event_detect': {'bouncetime': 500, 'callback': db.deurbel_handler, 'channel_number': 8,
                            'edge': 31}},

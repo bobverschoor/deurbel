@@ -28,8 +28,11 @@ class Deurbel:
         logging.info("Deurbel setup finished")
 
     def deurbel_handler(self, channel):
-        self._gong.sound()
-        self._messenger.send(text="Er staat iemand bij de voordeur")
+        if self._knop.pressed(channel):
+            self._gong.sound()
+            self._messenger.send(text="Er staat iemand bij de voordeur")
+        else:
+            logging.info("Ignoring event from: " + str(channel))
 
     def main(self):
         self.setup()
