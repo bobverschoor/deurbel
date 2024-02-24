@@ -21,8 +21,8 @@ class RaspberryPi:
         self._gpio.setwarnings(False)
         self._output_channel = -1
 
-    def setup_input_handler(self, channel_number, callback, bounce_time=200, resistor="pull_up",
-                            edge_detection="rising"):
+    def setup_input_handler(self, channel_number, callback, bounce_time, resistor,
+                            edge_detection):
         check_channel_number(channel_number)
         resistor = gpio_resistor(resistor)
         self._gpio.setup(channel_number, GPIO.IN, pull_up_down=resistor)
