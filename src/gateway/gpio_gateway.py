@@ -21,7 +21,7 @@ class RaspberryPi:
 
     def setup_input_handler(self, channel_number, callback, bounce_time=200):
         check_channel_number(channel_number)
-        self._gpio.setup(channel_number, GPIO.IN)
+        self._gpio.setup(channel_number, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         self._gpio.add_event_detect(channel_number, GPIO.RISING, callback=callback, bouncetime=bounce_time)
 
     def setup_output_channel(self, channel_number):
