@@ -1,8 +1,6 @@
 import unittest
-from datetime import datetime
 
 from deurbel import Deurbel
-from deurbel_gong import DeurbelGong
 
 
 class DeurbelTest(unittest.TestCase):
