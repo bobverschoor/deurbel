@@ -1,3 +1,4 @@
+import logging
 
 from gateway import gpio_gateway
 from configuration import ConfigurationException, Configuration
@@ -24,6 +25,7 @@ class DeurbelKnop:
 
     def pressed(self, channel):
         if channel == self._configured_channel:
+            logging.info("Input: " + str(self._pi.get_input(channel)))
             return True
         return False
 

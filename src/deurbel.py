@@ -29,7 +29,8 @@ class Deurbel:
 
     def deurbel_handler(self, channel):
         if self._knop.pressed(channel):
-            self._gong.sound()
+            if not self._gong.silence_window():
+                self._gong.sound()
             self._messenger.send(text="Er staat iemand bij de voordeur")
         else:
             logging.info("Ignoring event from: " + str(channel))
