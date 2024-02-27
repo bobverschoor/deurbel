@@ -24,9 +24,10 @@ class DeurbelKnop:
                                      resistor=configuration[DeurbelKnop.CONFIG_RESISTOR])
 
     def pressed(self, channel):
+        logging.info("Input: " + str(self._pi.get_input(channel)))
         if channel == self._configured_channel:
-            logging.info("Input: " + str(self._pi.get_input(channel)))
-            return True
+            if self._pi.get_input(channel):
+                return True
         return False
 
     def using_mock(self):

@@ -38,5 +38,6 @@ def add_event_detect(channel_number, edge, callback=None, bouncetime=0):
                         {"channel_number": channel_number, "edge": edge, "callback": callback,
                          "bouncetime": bouncetime}})
 
+
 def input(channel):
-    return 1
+    return HIGH
