@@ -3,6 +3,7 @@ import unittest
 from configuration import Configuration
 from device.telegram import Telegram
 from gateway.messenger_gateway import MessengerGateway
+from tests.mock_requestwrapper import MockRequestWrapper
 from tests.mock_telegram import MockTelegram
 
 
@@ -27,12 +28,14 @@ class TestMessengerGateway(unittest.TestCase):
                                                            Telegram.CONFIG_TOKEN: 'foobar',
                                                            Telegram.CONFIG_CHANNEL_ID: 'foobar2',
                                                            Telegram.CONFIG_BASE_URL: 'https://api.telegram.org'}]})
+        mg._devices[0]._request = MockRequestWrapper()
         mg.setup()
         self.assertTrue(mg.enabled)
         self.assertEqual(1, len(mg._devices))
 
     def test_send(self):
-        mg = MessengerGateway({Configuration.ENABLED: True})
+        mg = MessengerGateway({Configuration.ENABLED: True,
+                               MessengerGateway.DEVICES: [{MessengerGateway.NAME: "telegram"}]})
         mock_telegram = MockTelegram()
         mg._devices = [mock_telegram]
         mg.send(text="test")

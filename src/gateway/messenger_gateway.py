@@ -11,15 +11,9 @@ class MessengerGateway:
 
     def __init__(self, config):
         self._config = config
+        self._devices = []
         try:
             self.enabled = config[Configuration.ENABLED]
-        except KeyError:
-            self.enabled = False
-            logging.info("Messenger not enabled, configuration missing")
-        self._devices = []
-
-    def setup(self):
-        if self.enabled:
             if self.DEVICES not in self._config:
                 logging.warning("No messenger devices configured, turning messenger off")
                 self.enabled = False
@@ -30,12 +24,19 @@ class MessengerGateway:
                     else:
                         if device_config[self.NAME] == 'telegram':
                             device = Telegram(device_config)
-                            device.setup()
                             self._devices.append(device)
             if len(self._devices) == 0:
                 logging.warning("No messenger devices configured, turning messenger off")
                 self.enabled = False
-        logging.info("Messenger enabled: " + str(self.enabled))
+        except KeyError:
+            self.enabled = False
+            logging.info("Messenger not enabled, configuration missing")
+
+    def setup(self):
+        if self.enabled:
+            for device in self._devices:
+                device.setup()
+            logging.info("Messenger enabled: " + str(self.enabled))
 
     def send(self, text="", photo_filename=""):
         if self.enabled:

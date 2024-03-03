@@ -22,8 +22,16 @@ enabled = false
 output = true
 
 [modules.photo]
+temp_dir = "tmp"
 enabled = false
 input = true
+
+[[modules.photo.devices]]
+name = "test"
+url = "http://192.168.1.32"
+capture_path = "capture"
+control_path = "control"
+status_path = "status"
 
 [modules.homeautomation]
 enabled = false

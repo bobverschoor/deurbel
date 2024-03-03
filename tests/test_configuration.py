@@ -23,4 +23,7 @@ class TestConfiguration(unittest.TestCase):
 
     def test_get_module(self):
         config = Configuration("test-config.toml")
-        self.assertEqual({"enabled": False, "input": True}, config.get_module("photo"))
+        self.assertEqual({'devices': [
+            {'capture_path': 'capture', 'control_path': 'control', 'name': 'test', 'status_path': 'status',
+             'url': 'http://192.168.1.32'}], 'enabled': False, 'input': True, 'temp_dir': 'tmp'},
+                         config.get_module("photo"))

@@ -12,6 +12,8 @@ class Configuration:
     DEURBEL_GONG = 'deurbel_gong'
     MESSENGER = 'messenger'
     ENABLED = 'enabled'
+    PHOTO_CAMERA = "photo"
+    TEMP_DIR = "temp_dir"
 
     def __init__(self, filename):
         if os.path.exists(filename):

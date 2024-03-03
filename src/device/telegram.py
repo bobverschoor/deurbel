@@ -1,9 +1,5 @@
-import logging
-
-import requests
-from requests.exceptions import InvalidSchema, ConnectionError, MissingSchema
-
 from configuration import ConfigurationException
+from utils.requests_wrapper import RequestWrapper, RequestException
 
 
 class Telegram:
@@ -15,6 +11,7 @@ class Telegram:
         self._config = config
         self._url = ""
         self._channel_id = ""
+        self._request = RequestWrapper(timeout=5, origin=str(self))
 
     def setup(self):
         try:
@@ -25,15 +22,11 @@ class Telegram:
             base_url = self._config[self.CONFIG_BASE_URL]
             if not base_url.endswith("/"):
                 base_url = base_url + "/"
-            requests.get(base_url)
             self._url = base_url + token
+            self._request.http_get_text(base_url)
         except KeyError as e:
             raise ConfigurationException(str(e) + " from Telegram setup")
-        except InvalidSchema as e:
-            raise ConfigurationException(str(e) + " from Telegram setup")
-        except MissingSchema as e:
-            raise ConfigurationException(str(e) + " from Telegram setup")
-        except ConnectionError as e:
+        except RequestException as e:
             raise ConfigurationException(str(e) + " from Telegram setup")
 
     def send_photo(self, filename="", caption=""):
@@ -41,19 +34,22 @@ class Telegram:
         url = self._url + method
         body = {'chat_id': self._channel_id,
                 'caption': caption}
-        file = {'photo': open(filename, 'rb')}
-        r = requests.post(url, data=body, files=file)
-        if r.status_code != requests.codes.ok:
-            logging.error("Unable to send photo via Telegram using: " + url + " and body: " + str(body) + ", " + r.text)
+        with open(filename, 'rb') as fh:
+            file = {'photo': fh}
+            try:
+                self._request.http_post(url, data=body, files=file)
+            except RequestException:
+                pass
 
     def send_text(self, text=""):
         method = "/sendMessage"
         url = self._url + method
         body = {'chat_id': self._channel_id,
                 'text': text}
-        r = requests.post(url, data=body)
-        if r.status_code != requests.codes.ok:
-            logging.error("Unable to send text via Telegram using: " + url + " and body: " + str(body) + ", " + r.text)
+        try:
+            self._request.http_post(url, data=body)
+        except RequestException:
+            pass
 
     def __str__(self):
         return "Telegram"

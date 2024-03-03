@@ -4,6 +4,7 @@ from configuration import Configuration
 from deurbel_gong import DeurbelGong
 from deurbel_knop import DeurbelKnop
 from gateway.messenger_gateway import MessengerGateway
+from gateway.photo_gateway import PhotoGateway
 
 
 class Deurbel:
@@ -13,6 +14,7 @@ class Deurbel:
         self._gong = None
         self._knop = None
         self._messenger = None
+        self._photo_camera = None
 
     def setup(self):
         config = Configuration(self.config_filename)
@@ -22,16 +24,22 @@ class Deurbel:
         logging.info("Deurbel setup")
         self._gong = DeurbelGong(config.get_module(config.DEURBEL_GONG))
         self._knop = DeurbelKnop(config.get_module(config.DEURBEL_KNOP), handler=self.deurbel_handler)
+        self._photo_camera = PhotoGateway(config.get_module(config.PHOTO_CAMERA))
+        self._photo_camera.setup()
         self._messenger = MessengerGateway(config.get_module(config.MESSENGER))
         self._messenger.setup()
-        self._messenger.send(photo_filename="resources/aanbellen.jpeg", text="Setup")
+        photo_files = self._photo_camera.take()
+        if photo_files:
+            for photo_filename in photo_files:
+                self._messenger.send(photo_filename=photo_filename, text="Setup")
+        else:
+            self._messenger.send(photo_filename="resources/aanbellen.jpeg", text="Setup")
         logging.info("Deurbel setup finished")
 
     def deurbel_handler(self, channel):
         if self._knop.pressed(channel):
-            if not self._gong.silence_window():
-                self._gong.sound()
-            self._messenger.send(text="Er staat iemand bij de voordeur")
+            self._gong.sound()
+            self._messenger.send(text="Er staat iemand bij de voordeur", photo_filename=self._photo_camera.take())
         else:
             logging.info("Ignoring event from: " + str(channel))
 
