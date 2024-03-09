@@ -32,14 +32,10 @@ class PhotoGateway:
 
     def setup(self):
         if self.enabled:
-            if self.DEVICES not in self._config:
-                logging.warning("No photo devices configured, disabling cameras")
-                self.enabled = False
-            else:
-                if not os.path.exists(self._temp_dir):
-                    os.mkdir(self._temp_dir)
-                for device in self._devices:
-                    device.setup()
+            if not os.path.exists(self._temp_dir):
+                os.mkdir(self._temp_dir)
+            for device in self._devices:
+                device.setup()
 
     def take(self):
         photo_files = []

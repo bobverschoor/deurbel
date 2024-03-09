@@ -32,3 +32,7 @@ class MockRequestWrapper(RequestWrapper):
     def http_get_text(self, url, parameters=None):
         self._actions.append({"action": "http_get_text", "url": url, "parameters": parameters})
         return self._get_text_response
+
+    def http_get_stream(self, url):
+        self._actions.append({"action": "http_get_stream", "url": url})
+        return bytes()
