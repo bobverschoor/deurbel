@@ -13,6 +13,10 @@ class MockRequestWrapper(RequestWrapper):
 
     def _post(self, url, data=None, files=None):
         if 'caption' in data and data['caption'] == 'Exception':
+            self._actions.append({"raised": "RequestException"})
+            raise RequestException("test")
+        elif 'text' in data and data['text'] == 'Exception':
+            self._actions.append({"raised": "RequestException"})
             raise RequestException("test")
         if files:
             if 'photo' in files:

@@ -1,10 +1,8 @@
-import os
 import unittest
 
 from configuration import ConfigurationException
 from device.telegram import Telegram
 from tests.mock_requestwrapper import MockRequestWrapper
-from utils.requests_wrapper import RequestException
 
 
 class TestTelegram(unittest.TestCase):
@@ -43,6 +41,9 @@ class TestTelegram(unittest.TestCase):
                            "data": {'chat_id': 'foobar2', 'text': "testing text"}, "files": None}],
                          t._request._actions)
         t._request._actions = []
+        t.send_text("Exception")
+        self.assertEqual([{"raised": "RequestException"}], t._request._actions)
+        t._request._actions = []
         t.send_photo(filename="../resources/aanbellen.jpeg", caption="Testing Caption")
         with open("../resources/aanbellen.jpeg", 'rb') as fh:
             self.assertEqual([
@@ -51,6 +52,5 @@ class TestTelegram(unittest.TestCase):
                                "files": {'photo': fh.name}}],
                              t._request._actions)
         t._request._actions = []
-        self.assertRaises(RequestException, t.send_photo, filename="../resources/aanbellen.jpeg", caption="Exception")
-
-
+        t.send_photo(filename="../resources/aanbellen.jpeg", caption="Exception")
+        self.assertEqual([{"raised": "RequestException"}], t._request._actions)
