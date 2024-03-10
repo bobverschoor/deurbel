@@ -7,10 +7,6 @@ class MockRequestWrapper(RequestWrapper):
         self._actions = []
         self._get_text_response = ""
 
-    def _get(self, url, parameters=None, stream=False):
-        self._actions.append({"action": "_get", "url": url, "parameters": parameters, "stream": stream})
-        return self._get_text_response
-
     def _post(self, url, data=None, files=None):
         if 'caption' in data and data['caption'] == 'Exception':
             self._actions.append({"raised": "RequestException"})

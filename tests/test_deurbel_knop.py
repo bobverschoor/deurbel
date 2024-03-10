@@ -16,6 +16,12 @@ class TestDeurbelKnop(unittest.TestCase):
                           {'enabled': True, 'output': True, 'bounce_time_ms': 500, 'gpio_channel': 100,
                            'edge_detection': 0, 'resistor': 0}, None)
 
+    def test_pressed_wrong_channel(self):
+        knop = DeurbelKnop({'enabled': True, 'output': True, 'bounce_time_ms': 1, 'gpio_channel': 7,
+                    'edge_detection': 'rising', 'resistor': 'pull_up'},
+                   None)
+        self.assertFalse(knop.pressed(8))
+
     def test_using_mock(self):
         knop = DeurbelKnop({'enabled': True, 'output': True, 'bounce_time_ms': 1, 'gpio_channel': 7,
                             'edge_detection': 'rising', 'resistor': 'pull_up'},
