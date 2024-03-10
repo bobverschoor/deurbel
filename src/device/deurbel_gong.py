@@ -1,6 +1,5 @@
 import logging
 import time
-from datetime import datetime
 
 from gateway import gpio_gateway
 from configuration import ConfigurationException, Configuration
