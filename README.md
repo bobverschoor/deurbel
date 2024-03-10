@@ -6,7 +6,7 @@ Een fysieke knop bij de deur wordt ingedrukt.
 Dit wordt gedetecteerd door de applicatie en een aantal acties worden uitgezet:
 1. De gong wordt geluid
 2. (optioneel) Een foto wordt genomen
-3. (optioneel) Een bericht wordt gestuurd via Telegram, met daarin indien de foto.
+3. (optioneel) Een bericht wordt gestuurd via Telegram, met daarin de foto als deze aanwezig is, en anders tekst.
 4. (optioneel) Een trigger wordt gestuurd naar home assistant.
 
 ## Elektrotechnisch schema
@@ -61,6 +61,12 @@ git clone https://github.com/bobverschoor/deurbel.git
 Het RPI.GPIO-package moet op deze omgeving worden toegevoegd aan poetry via:
 
     poetry add RPi.GPIO
+
+Kopieer de configuratie file:
+
+    cp resources/config.toml.example resources/config.toml
+
+En pas de `config.toml` bestand aan met een editor. Het voorbeeld geeft suggesties voor de waarden.
 
 Test of het script kan draaien zonder fouten via:
 

@@ -27,8 +27,21 @@ base_url = "https://api.telegram.org"
 channel_id = ""
 
 [modules.photo]
-enabled = false
+temp_dir = "" # for storage of photo's
+enabled = true
 input = true
+
+[[modules.photo.devices]]
+name = "esp32cam"
+url = "" # Compleet URL inclusive protocol, ex. http://192.168.1.32
+capture_path = "capture" # Path relative to url to send command to capture photo
+control_path = "control" # Path relative to url to send command to control various parameters photo
+status_path = "status" # Path relative to url to send command to get status of various parameters photo
+[[modules.photo.devices.control_parameters]]
+"framesize" = 11 # an example of an control parameter
+[[modules.photo.devices.control_parameters]]
+"quality" = 4 # another example of an control parameter
+
 
 [modules.homeautomation]
 enabled = false

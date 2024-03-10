@@ -1,7 +1,7 @@
 import unittest
 
 from configuration import ConfigurationException
-from deurbel_knop import DeurbelKnop
+from device.deurbel_knop import DeurbelKnop
 from gateway.gpio_gateway import RaspberryPiException
 
 

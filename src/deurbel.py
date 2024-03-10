@@ -1,8 +1,8 @@
 import time
 import logging
 from configuration import Configuration
-from deurbel_gong import DeurbelGong
-from deurbel_knop import DeurbelKnop
+from device.deurbel_gong import DeurbelGong
+from device.deurbel_knop import DeurbelKnop
 from gateway.messenger_gateway import MessengerGateway
 from gateway.photo_gateway import PhotoGateway
 
