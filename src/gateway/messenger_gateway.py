@@ -40,6 +40,7 @@ class MessengerGateway:
 
     def send(self, text="", photo_filename=""):
         if self.enabled:
+            logging.info("Sending message: " + str(text) + ":" + str(photo_filename))
             for device in self._devices:
                 if photo_filename:
                     if os.path.exists(photo_filename):

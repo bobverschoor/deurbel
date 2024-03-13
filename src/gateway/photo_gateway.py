@@ -40,9 +40,11 @@ class PhotoGateway:
     def take(self):
         photo_files = []
         if self.enabled:
+            logging.info("Taking picture")
             now = datetime.now()
             for device in self._devices:
                 file_path = os.path.join(self._temp_dir, str(device) +
                                          datetime.strftime(now, '%Y-%m-%dT%H-%M-%S-%s'))
                 photo_files.append(device.capture(file_path))
+        logging.info("Pictures taken to: " + str(photo_files))
         return photo_files
