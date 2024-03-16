@@ -144,3 +144,10 @@ cython_debug/
 !/deurbel.iml
 !/resources/config.toml
 /tmp/
+/tests/deurbel.log
+/deurbel.log
+/.idea/vcs.xml
+/.idea/modules.xml
+/.idea/misc.xml
+/resources/config.toml
+/.idea/inspectionProfiles/Project_Default.xml
