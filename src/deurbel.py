@@ -30,21 +30,15 @@ class Deurbel:
         self._messenger.setup()
         photo_files = self._photo_camera.take()
         if photo_files:
-            for photo_filename in photo_files:
-                self._messenger.send(photo_filename=photo_filename, text="Setup")
+            self._messenger.send(photo_filenames=photo_files, text="Setup")
         else:
-            self._messenger.send(photo_filename="resources/aanbellen.jpeg", text="Setup")
+            self._messenger.send(photo_filenames=["resources/aanbellen.jpeg"], text="Setup")
         logging.info("Deurbel setup finished")
 
     def deurbel_handler(self, channel):
         if self._knop.pressed(channel):
             self._gong.sound()
-            photo_files = self._photo_camera.take()
-            if photo_files:
-                for photo_filename in photo_files:
-                    self._messenger.send(photo_filename=photo_filename, text="Er staat iemand bij de voordeur")
-            else:
-                self._messenger.send(text="Er staat iemand bij de voordeur")
+            self._messenger.send(photo_filenames=self._photo_camera.take(), text="Er staat iemand bij de voordeur")
         else:
             logging.info("Ignoring event from: " + str(channel))
 

@@ -38,18 +38,21 @@ class MessengerGateway:
                 device.setup()
             logging.info("Messenger enabled: " + str(self.enabled))
 
-    def send(self, text="", photo_filename=""):
+    def send(self, text="", photo_filenames=None):
+        if photo_filenames is None:
+            photo_filenames = []
         if self.enabled:
-            logging.info("Sending message: " + str(text) + ":" + str(photo_filename))
+            logging.info("Sending message: " + str(text) + ":" + str(photo_filenames))
             for device in self._devices:
-                if photo_filename:
-                    if os.path.exists(photo_filename):
-                        device.send_photo(filename=photo_filename, caption=text)
-                        logging.info("Photo send to device: " + str(device))
-                    else:
-                        logging.warning("Could not locate photofile: " + str(photo_filename))
-                        device.send_text(text)
-                        logging.info("Text send to device: " + str(device))
+                if photo_filenames:
+                    for photo_filename in photo_filenames:
+                        if os.path.exists(photo_filename):
+                            device.send_photo(filename=photo_filename, caption=text)
+                            logging.info("Photo send to device: " + str(device))
+                        else:
+                            logging.warning("Could not locate photofile: " + str(photo_filename))
+                            device.send_text(text)
+                            logging.info("Text send to device: " + str(device))
                 else:
                     device.send_text(text)
                     logging.info("Text send to device: " + str(device))

@@ -39,8 +39,8 @@ class TestMessengerGateway(unittest.TestCase):
         mock_telegram = MockTelegram()
         mg._devices = [mock_telegram]
         mg.send(text="test")
-        mg.send(photo_filename="deurbel.log", text="test2")
-        mg.send(photo_filename="onvindbaar.jpg", text="test3")
+        mg.send(photo_filenames=["deurbel.log"], text="test2")
+        mg.send(photo_filenames=["onvindbaar.jpg"], text="test3")
         self.assertEqual([{"method": "send_text", "text": "test"},
                           {"method": "send_photo", "filename": "deurbel.log", "caption": "test2"},
                           {"method": "send_text", "text": "test3"}],
