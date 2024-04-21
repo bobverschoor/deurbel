@@ -5,6 +5,7 @@ from device.deurbel_gong import DeurbelGong
 from device.deurbel_knop import DeurbelKnop
 from gateway.messenger_gateway import MessengerGateway
 from gateway.photo_gateway import PhotoGateway
+import threading
 
 
 class Deurbel:
@@ -37,8 +38,11 @@ class Deurbel:
 
     def deurbel_handler(self, channel):
         if self._knop.pressed(channel):
-            self._gong.sound()
+            gong = threading.Thread(target=self._gong.sound)
+            gong.start()
+#            self._gong.sound()
             self._messenger.send(photo_filenames=self._photo_camera.take(), text="Er staat iemand bij de voordeur")
+            gong.join()
         else:
             logging.info("Ignoring event from: " + str(channel))
 
