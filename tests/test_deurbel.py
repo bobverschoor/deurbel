@@ -4,6 +4,7 @@ from deurbel import Deurbel
 from tests.mock_deurbelgong import MockDeurbelGong
 from tests.mock_deurbelknop import MockDeurbelKnop
 from tests.mock_messenger import MockMessenger
+from tests.mock_mqtt import MockMQTT
 from tests.mock_photocamera import MockPhotoCamera
 
 
@@ -30,6 +31,7 @@ class DeurbelTest(unittest.TestCase):
         db._knop = MockDeurbelKnop()
         db._messenger = MockMessenger()
         db._photo_camera = MockPhotoCamera()
+        db._home_automation = MockMQTT()
         channel = 7
         db.deurbel_handler(channel)
         self.assertEqual([{'sound': True}], db._gong._actions)
@@ -37,6 +39,7 @@ class DeurbelTest(unittest.TestCase):
         self.assertEqual([{'send': "photo_filenames=photo.jpg, text=Er staat iemand bij de voordeur"}],
                          db._messenger._actions)
         self.assertEqual([{'take': True}], db._photo_camera._actions)
+        self.assertEqual([{'trigger': True}], db._home_automation._actions)
 
 
     # def test_deurbel_silence_window(self):

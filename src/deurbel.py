@@ -3,6 +3,7 @@ import logging
 from configuration import Configuration
 from device.deurbel_gong import DeurbelGong
 from device.deurbel_knop import DeurbelKnop
+from device.mqtt_client import MQTT
 from gateway.messenger_gateway import MessengerGateway
 from gateway.photo_gateway import PhotoGateway
 import threading
@@ -16,6 +17,7 @@ class Deurbel:
         self._knop = None
         self._messenger = None
         self._photo_camera = None
+        self._home_automation = None
 
     def setup(self):
         config = Configuration(self.config_filename)
@@ -34,14 +36,19 @@ class Deurbel:
             self._messenger.send(photo_filenames=photo_files, text="Setup")
         else:
             self._messenger.send(photo_filenames=["resources/aanbellen.jpeg"], text="Setup")
+        self._home_automation = MQTT(config.get_module(config.HOME_AUTOMATION))
+        self._home_automation.setup()
+        self._home_automation.trigger()
         logging.info("Deurbel setup finished")
 
     def deurbel_handler(self, channel):
         if self._knop.pressed(channel):
             gong = threading.Thread(target=self._gong.sound)
+            home_automation = threading.Thread(target=self._home_automation.trigger)
             gong.start()
-#            self._gong.sound()
+            home_automation.start()
             self._messenger.send(photo_filenames=self._photo_camera.take(), text="Er staat iemand bij de voordeur")
+            home_automation.join()
             gong.join()
         else:
             logging.info("Ignoring event from: " + str(channel))
