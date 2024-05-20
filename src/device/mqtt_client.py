@@ -3,7 +3,7 @@ import logging
 
 import paho.mqtt.publish as mqtt
 
-from configuration import Configuration, ConfigurationException
+from configuration import Configuration
 
 
 class MQTT:
