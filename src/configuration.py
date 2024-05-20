@@ -13,6 +13,7 @@ class Configuration:
     MESSENGER = 'messenger'
     ENABLED = 'enabled'
     PHOTO_CAMERA = "photo"
+    HOME_AUTOMATION = "homeautomation"
     TEMP_DIR = "temp_dir"
 
     def __init__(self, filename):

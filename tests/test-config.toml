@@ -36,3 +36,10 @@ status_path = "status"
 [modules.homeautomation]
 enabled = false
 output = true
+username = "homeassistant"
+password = "fake_password"
+host = "test-homeassistant.local"
+port = 1883
+discovery_topic = "homeassistant/device_automation/deurbel/config"
+action_topic = "homeassistant/deurbel/action"
+client_id = "deurbel"
