@@ -57,8 +57,11 @@ class Esp32Cam:
 
     def capture(self, photo_filename):
         photo_filename = photo_filename + ".jpg"
-        with open(photo_filename, 'wb') as f:
-            f.write(self._request.http_get_stream(self._capture_url))
+        try:
+            with open(photo_filename, 'wb') as f:
+                f.write(self._request.http_get_stream(self._capture_url))
+        except RequestException as e:
+            raise Esp32CamException(str(e) + " from Esp32Cam capture")
         return photo_filename
 
     def __str__(self):

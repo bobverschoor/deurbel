@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 
 from configuration import Configuration
-from device.esp32cam import Esp32Cam
+from device.esp32cam import Esp32Cam, Esp32CamException
 
 
 class PhotoGateway:
@@ -39,12 +39,15 @@ class PhotoGateway:
 
     def take(self):
         photo_files = []
-        if self.enabled:
-            logging.info("Taking picture")
-            now = datetime.now()
-            for device in self._devices:
-                file_path = os.path.join(self._temp_dir, str(device) +
-                                         datetime.strftime(now, '%Y-%m-%dT%H-%M-%S-%s'))
-                photo_files.append(device.capture(file_path))
-        logging.info("Pictures taken to: " + str(photo_files))
+        try:
+            if self.enabled:
+                logging.info("Taking picture")
+                now = datetime.now()
+                for device in self._devices:
+                    file_path = os.path.join(self._temp_dir, str(device) +
+                                             datetime.strftime(now, '%Y-%m-%dT%H-%M-%S-%s'))
+                    photo_files.append(device.capture(file_path))
+            logging.info("Pictures taken to: " + str(photo_files))
+        except Esp32CamException as e:
+            logging.error("Error while taking picture: " + str(e))
         return photo_files
