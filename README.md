@@ -67,9 +67,9 @@ Code uitchecken:
     git clone https://github.com/bobverschoor/deurbel.git
     cd deurbel
 
-Zet de juiste lokale versie van python:
+Zorg dat poetry de juiste versie van python gaat gebruiken:
 
-    pyenv local 3.11
+    poetry env use 3.11
 
 Het RPI.GPIO-package moet op deze omgeving (en in die directory) worden toegevoegd aan poetry via:
 
@@ -91,6 +91,7 @@ naar de juiste directory, en vervolgens de service te starten:
     mkdir -p ~/.config/systemd/user/
     cp resources/deurbel.service ~/.config/systemd/user/
     systemctl --user enable deurbel
+    loginctl enable-linger $USER
     systemctl --user daemon-reload
     systemctl --user start deurbel
 
