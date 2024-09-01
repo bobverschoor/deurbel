@@ -27,6 +27,10 @@ Dit wordt geleverd door Pin 8 'Aan' te zetten vanuit het programma.
 
 ## Installatie
 
+| Bookworm Release heeft een breaking change gehad met betrekking tot GPIO, en werkt tot op heden nog niet lekker met add_eventlistener.<br/>Daarom wordt aangeraden om voorlopig alleen de BullsEye release te gebruiken. |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+
 Uitgaande van een schone raspberry Pi bullseye release moeten de volgende pakketten worden geïnstalleerd:
 
     sudo apt-get install git python3-distutils python3-dev libffi-dev cargo python3-pip libssl-dev libbz2-dev libreadline-dev liblzma-dev libsqlite3-dev rpi.gpio
@@ -35,30 +39,39 @@ Installeren van pyenv voor de virtuele environment:
 
     curl https://pyenv.run | bash
 
-Voeg toe aan .bashrc:
+Voeg toe aan .bashrc via onderstaande commando's:
 
     echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
     echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
     echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 
-En aan .profile:
+En aan .profile via onderstaande commando's:
 
     echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
     echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
     echo 'eval "$(pyenv init -)"' >> ~/.profile
 
-Installeren van python 3.11 in de virtuele omgeving:
+Vervolgens uit en dan weer inloggen, en daarna installeren van python 3.11 in de virtuele omgeving 
+(dit kan wel even duren, ongeveer een half uur!):
 
     pyenv install 3.11
 
-Installeren van Poetry voor package management:
+Installeren van Poetry voor package management (3 minuutjes):
     
     curl -sSL https://install.python-poetry.org | python3 -
 
-Code uitchecken:
-git clone https://github.com/bobverschoor/deurbel.git
+En voeg de toe aan het pad, zoals vermeld aan het einde, of gebruik altijd de volledige padnaam voor poetry.
 
-Het RPI.GPIO-package moet op deze omgeving worden toegevoegd aan poetry via:
+Code uitchecken:
+
+    git clone https://github.com/bobverschoor/deurbel.git
+    cd deurbel
+
+Zet de juiste lokale versie van python:
+
+    pyenv local 3.11
+
+Het RPI.GPIO-package moet op deze omgeving (en in die directory) worden toegevoegd aan poetry via:
 
     poetry add RPi.GPIO
 
