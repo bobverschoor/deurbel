@@ -11,7 +11,7 @@ requests = "^2.32.3"
 paho-mqtt = "^2.1.0"
 
 [tool.poetry.group.dev.dependencies]
-setuptools = "^75.6.0"
+setuptools = "^77.0.3"
 
 [build-system]
 requires = ["poetry-core"]
