@@ -1,3 +1,4 @@
+import os.path
 import unittest
 
 from configuration import ConfigurationException
@@ -44,13 +45,14 @@ class TestTelegram(unittest.TestCase):
         t.send_text("Exception")
         self.assertEqual([{"raised": "RequestException"}], t._request._actions)
         t._request._actions = []
-        t.send_photo(filename="../resources/aanbellen.jpeg", caption="Testing Caption")
-        with open("../resources/aanbellen.jpeg", 'rb') as fh:
+        print(os.path.curdir)
+        t.send_photo(filename="resources/aanbellen.jpeg", caption="Testing Caption")
+        with open("resources/aanbellen.jpeg", 'rb') as fh:
             self.assertEqual([
                               {"action": "_post", "url": t._url + "/sendPhoto",
                                "data": {'chat_id': 'foobar2', 'caption': "Testing Caption"},
                                "files": {'photo': fh.name}}],
                              t._request._actions)
         t._request._actions = []
-        t.send_photo(filename="../resources/aanbellen.jpeg", caption="Exception")
+        t.send_photo(filename="resources/aanbellen.jpeg", caption="Exception")
         self.assertEqual([{"raised": "RequestException"}], t._request._actions)

@@ -10,7 +10,7 @@ from tests.mock_photocamera import MockPhotoCamera
 
 class DeurbelTest(unittest.TestCase):
     def test_deurbel_gong(self):
-        db = Deurbel(config_filename="test-config.toml")
+        db = Deurbel(config_filename="tests/test-config.toml")
         db.setup()
         self.assertIsNotNone(db._gong)
         self.assertIsNotNone(db._knop)
