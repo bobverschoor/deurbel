@@ -9,6 +9,7 @@ class DeurbelKnop:
     CONFIG_BOUNCE_TIME = "bounce_time_ms"
     CONFIG_EDGE = "edge_detection"
     CONFIG_RESISTOR = "resistor"
+    CONFIG_PULL_UP = "pull_up"
 
     def __init__(self, configuration, handler):
         if not configuration[Configuration.ENABLED]:
@@ -20,7 +21,7 @@ class DeurbelKnop:
         bcm_nr = "BOARD" + str(configuration[DeurbelKnop.CONFIG_CHANNEL_NUMBER])
         self._button = Button(bcm_nr,
                               bounce_time=configuration[DeurbelKnop.CONFIG_BOUNCE_TIME],
-                              pull_up = ("pull_up == " + configuration[DeurbelKnop.CONFIG_RESISTOR]) )
+                              pull_up = configuration[DeurbelKnop.CONFIG_PULL_UP] )
         self._button.when_pressed = handler
 
 
