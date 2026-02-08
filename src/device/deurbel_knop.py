@@ -6,6 +6,7 @@ from configuration import ConfigurationException, Configuration
 
 class DeurbelKnop:
     CONFIG_CHANNEL_NUMBER = "gpio_channel"
+    CONFIG_BCM_PIN_NR = "bcm_pin_nr"
     CONFIG_BOUNCE_TIME = "bounce_time_ms"
     CONFIG_EDGE = "edge_detection"
     CONFIG_RESISTOR = "resistor"
@@ -18,8 +19,7 @@ class DeurbelKnop:
         if configuration[DeurbelKnop.CONFIG_BOUNCE_TIME] > 1000 or configuration[DeurbelKnop.CONFIG_BOUNCE_TIME] < 0:
             raise ConfigurationException("Bounce time not within boundaries (0, 1000): " +
                                          str(configuration[DeurbelKnop.CONFIG_BOUNCE_TIME]))
-        bcm_nr = "BOARD" + str(configuration[DeurbelKnop.CONFIG_CHANNEL_NUMBER])
-        self._button = Button(bcm_nr,
+        self._button = Button(configuration[DeurbelKnop.CONFIG_BCM_PIN_NR],
                               bounce_time=configuration[DeurbelKnop.CONFIG_BOUNCE_TIME],
                               pull_up = configuration[DeurbelKnop.CONFIG_PULL_UP] )
         self._button.when_pressed = handler

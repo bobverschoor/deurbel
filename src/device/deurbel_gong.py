@@ -7,6 +7,7 @@ class DeurbelGong:
     CONFIG_DURATION = "gong_duration_ms"
     CONFIG_CHANNEL_NUMBER = "gpio_channel"
     CONFIG_SILENCE_WINDOW = "silence_window"
+    CONFIG_BCM_PIN_NR = "bcm_pin_nr"
 
     def __init__(self, configuration):
         self.enabled = configuration[Configuration.ENABLED]
@@ -15,8 +16,7 @@ class DeurbelGong:
         if self._duration_ms > 10000 or self._duration_ms < 0:
             raise ConfigurationException("gong duration exceeds limits, should be between 0 - 10 seconds: "
                                          + str(self._duration_ms))
-        bcm_nr = "BOARD" + str(configuration[DeurbelGong.CONFIG_CHANNEL_NUMBER])
-        self._gong = Buzzer(bcm_nr)
+        self._gong = Buzzer(configuration[DeurbelGong.CONFIG_BCM_PIN_NR])
 
     def sound(self):
         if self.enabled:
