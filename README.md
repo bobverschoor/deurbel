@@ -27,13 +27,11 @@ Dit wordt geleverd door Pin 8 'Aan' te zetten vanuit het programma.
 
 ## Installatie
 
-| Bookworm Release heeft een breaking change gehad met betrekking tot GPIO, en werkt tot op heden nog niet lekker met add_eventlistener.<br/>Daarom wordt aangeraden om voorlopig alleen de BullsEye release te gebruiken. |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+Uitgaande van een schone raspberry Pi trixie release moeten de volgende pakketten worden geïnstalleerd:
 
+OUD: sudo apt-get install git python3-distutils python3-dev libffi-dev cargo python3-pip libssl-dev libbz2-dev libreadline-dev liblzma-dev libsqlite3-dev python3-gpiozero
 
-Uitgaande van een schone raspberry Pi bullseye release moeten de volgende pakketten worden geïnstalleerd:
-
-    sudo apt-get install git python3-distutils python3-dev libffi-dev cargo python3-pip libssl-dev libbz2-dev libreadline-dev liblzma-dev libsqlite3-dev rpi.gpio
+    sudo apt-get install git python3-gpiozero python3-dev python3-pip vim libssl-dev libbz2-dev libreadline-dev libsqlite3-dev libncurses-dev tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
 Installeren van pyenv voor de virtuele environment:
 
@@ -54,7 +52,7 @@ En aan .profile via onderstaande commando's:
 Vervolgens uit en dan weer inloggen, en daarna installeren van python 3.11 in de virtuele omgeving 
 (dit kan wel even duren, ongeveer een half uur!):
 
-    pyenv install 3.11
+    pyenv install 3.13
 
 Installeren van Poetry voor package management (3 minuutjes):
     
@@ -69,11 +67,11 @@ Code uitchecken:
 
 Zorg dat poetry de juiste versie van python gaat gebruiken:
 
-    poetry env use 3.11
+    poetry env use 3.13
 
 Het RPI.GPIO-package moet op deze omgeving (en in die directory) worden toegevoegd aan poetry via:
 
-    poetry add RPi.GPIO
+    poetry add gpiozero
 
 Kopieer de configuratie file:
 
