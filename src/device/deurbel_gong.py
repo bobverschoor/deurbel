@@ -16,7 +16,7 @@ class DeurbelGong:
         if self._duration_ms > 10000 or self._duration_ms < 0:
             raise ConfigurationException("gong duration exceeds limits, should be between 0 - 10 seconds: "
                                          + str(self._duration_ms))
-        self._gong = Buzzer(configuration[DeurbelGong.CONFIG_BCM_PIN_NR])
+        self._gong = Buzzer(pin=configuration[DeurbelGong.CONFIG_BCM_PIN_NR])
 
     def sound(self):
         if self.enabled:

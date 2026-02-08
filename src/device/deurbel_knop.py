@@ -19,7 +19,7 @@ class DeurbelKnop:
         if configuration[DeurbelKnop.CONFIG_BOUNCE_TIME] > 1000 or configuration[DeurbelKnop.CONFIG_BOUNCE_TIME] < 0:
             raise ConfigurationException("Bounce time not within boundaries (0, 1000): " +
                                          str(configuration[DeurbelKnop.CONFIG_BOUNCE_TIME]))
-        self._button = Button(configuration[DeurbelKnop.CONFIG_BCM_PIN_NR],
+        self._button = Button(pin=configuration[DeurbelKnop.CONFIG_BCM_PIN_NR],
                               bounce_time=configuration[DeurbelKnop.CONFIG_BOUNCE_TIME],
                               pull_up = configuration[DeurbelKnop.CONFIG_PULL_UP] )
         self._button.when_pressed = handler
