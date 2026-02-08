@@ -56,10 +56,6 @@ class Deurbel:
 
     def main(self):
         self.setup()
-        if self._knop.using_mock():
-            logging.error("Using DEV version of GPIO. Install GPIO library first!")
-            print("Deurbel Stopping due to error: Using DEV version of GPIO")
-            raise RuntimeError("Deurbel Stopping due to error: Using DEV version of GPIO")
         logging.info("Entering main loop...")
         while True:
             time.sleep(self.timeout)
