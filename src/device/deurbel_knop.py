@@ -23,6 +23,7 @@ class DeurbelKnop:
                               bounce_time=configuration[DeurbelKnop.CONFIG_BOUNCE_TIME],
                               pull_up = configuration[DeurbelKnop.CONFIG_PULL_UP] )
         self._button.when_pressed = handler
+        print(self._button)
 
 
     def pressed(self, channel):

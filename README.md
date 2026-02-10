@@ -31,7 +31,7 @@ Uitgaande van een schone raspberry Pi trixie release moeten de volgende pakkette
 
 OUD: sudo apt-get install git python3-distutils python3-dev libffi-dev cargo python3-pip libssl-dev libbz2-dev libreadline-dev liblzma-dev libsqlite3-dev python3-gpiozero
 
-    sudo apt-get install git python3-gpiozero python3-dev python3-pip vim libssl-dev libbz2-dev libreadline-dev libsqlite3-dev libncurses-dev tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+    sudo apt-get install git python3-gpiozero python3-dev python3-pip vim libssl-dev libbz2-dev libreadline-dev libsqlite3-dev libncurses-dev tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev swig python3-setuptools
 
 Installeren van pyenv voor de virtuele environment:
 
@@ -59,6 +59,15 @@ Installeren van Poetry voor package management (3 minuutjes):
     curl -sSL https://install.python-poetry.org | python3 -
 
 En voeg de toe aan het pad, zoals vermeld aan het einde, of gebruik altijd de volledige padnaam voor poetry.
+
+Er zit een fout in de lgpio library. Fix dit via:
+
+    wget http://abyz.me.uk/lg/lg.zip
+    unzip lg.zip
+    cd lg
+    make
+    sudo make install
+
 
 Code uitchecken:
 
