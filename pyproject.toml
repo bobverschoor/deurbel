@@ -13,7 +13,7 @@ pytest = "^9.0.2"
 gpiozero = "^2.0.1"
 
 [tool.poetry.group.dev.dependencies]
-setuptools = "^80.9.0"
+setuptools = "^82.0.0"
 
 [build-system]
 requires = ["poetry-core"]
