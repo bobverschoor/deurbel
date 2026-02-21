@@ -2,6 +2,7 @@ import logging
 import time
 from configuration import ConfigurationException, Configuration
 from gpiozero import Buzzer
+from gpiozero.exc import BadPinFactory
 
 class DeurbelGong:
     CONFIG_DURATION = "gong_duration_ms"
@@ -16,7 +17,10 @@ class DeurbelGong:
         if self._duration_ms > 10000 or self._duration_ms < 0:
             raise ConfigurationException("gong duration exceeds limits, should be between 0 - 10 seconds: "
                                          + str(self._duration_ms))
-        self._gong = Buzzer(pin=configuration[DeurbelGong.CONFIG_BCM_PIN_NR])
+        try:
+            self._gong = Buzzer(pin=configuration[DeurbelGong.CONFIG_BCM_PIN_NR])
+        except BadPinFactory:
+            self.enabled = False
 
     def sound(self):
         if self.enabled:
