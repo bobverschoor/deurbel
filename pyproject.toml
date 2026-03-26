@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.13"
-requests = "^2.32.5"
+requests = "^2.33.0"
 paho-mqtt = "^2.1.0"
 pytest = "^9.0.2"
 gpiozero = "^2.0.1"
